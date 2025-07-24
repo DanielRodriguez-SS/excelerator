@@ -34,7 +34,7 @@ if master_file:
                 if df_master.iloc[index_store + (store_name_row+1), index_code + (store_name_column+1)] == 'R':
                     season_ranging_data['Store'].append(store)
                     season_ranging_data['ITEMNUMBER'].append(code)
-                    season_ranging_data['PRODUCTNAME'].append(df_master.iloc[1, index_code + 4])
+                    season_ranging_data['PRODUCTNAME'].append(df_master.iloc[store_name_row-2, index_code + store_name_column+1])
         df_new_season = pd.DataFrame(season_ranging_data)
         #st.dataframe(df_new_season)
 
