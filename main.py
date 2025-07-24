@@ -11,12 +11,12 @@ if master_file:
 
     store_name_column = st.number_input("Enter the numner of the column where 'Store Name' is located:", min_value=0)
     store_name_row = st.number_input("Enter the numner of the row where 'Store Name' is located:", min_value=0)
-    
+
     all_stores = df_master.iloc[store_name_row + 1:, store_name_column].to_list()
     store_label = df_master.iloc[store_name_row,store_name_column]
-    
+
     if store_label == 'Store Name':
-    
+
         st.write(f'Total Stores: {len(all_stores)}')
         #st.write(all_stores)
         all_codes = df_master.iloc[store_name_row, store_name_column + 1:].to_list()
@@ -28,22 +28,22 @@ if master_file:
         season_ranging_data['Store'] = []
         season_ranging_data['ITEMNUMBER'] = []
         season_ranging_data['PRODUCTNAME'] = []
-    
+
         for index_code, code in enumerate(all_codes):
             for index_store ,store in enumerate(all_stores):
-                if df_master.iloc[index_store + 4, index_code + 4] == 'R':
+                if df_master.iloc[index_store + (store_name_row+1), index_code + (store_name_column+1)] == 'R':
                     season_ranging_data['Store'].append(store)
                     season_ranging_data['ITEMNUMBER'].append(code)
                     season_ranging_data['PRODUCTNAME'].append(df_master.iloc[1, index_code + 4])
         df_new_season = pd.DataFrame(season_ranging_data)
         #st.dataframe(df_new_season)
-    
-        chunk_size = 1000
-    
+
+        chunk_size = 4000
+
         chunks = [df_new_season.iloc[i:i + chunk_size] for i in range(0, len(df_new_season), chunk_size)]
-    
+
         for idx, chunk in enumerate(chunks):
             st.dataframe(chunk, hide_index=True)
-    
+
     else:
         st.warning('Stores not found, please verify the cell')
