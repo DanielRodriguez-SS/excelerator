@@ -31,7 +31,7 @@ if master_file:
 
         for index_code, code in enumerate(all_codes):
             for index_store ,store in enumerate(all_stores):
-                if df_master.iloc[index_store + (store_name_row+1), index_code + (store_name_column+1)] == 'R':
+                if (df_master.iloc[index_store + (store_name_row+1), index_code + (store_name_column+1)] == 'R') or (df_master.iloc[index_store + (store_name_row+1), index_code + (store_name_column+1)] == '1'):
                     season_ranging_data['Store'].append(store)
                     season_ranging_data['ITEMNUMBER'].append(code)
                     season_ranging_data['PRODUCTNAME'].append(df_master.iloc[store_name_row-2, index_code + store_name_column+1])
