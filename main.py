@@ -16,14 +16,9 @@ if master_file:
     store_label = df_master.iloc[store_name_row,store_name_column]
 
     if store_label == 'Store Name':
-
         st.write(f'Total Stores: {len(all_stores)}')
-        #st.write(all_stores)
         all_codes = df_master.iloc[store_name_row, store_name_column + 1:].to_list()
         st.write(f'Total Codes: {len(all_codes)}')
-        #st.write(all_codes)
-        #for code in all_codes:
-        #    st.write(code)
         season_ranging_data = {}
         season_ranging_data['Store'] = []
         season_ranging_data['ITEMNUMBER'] = []
@@ -31,12 +26,11 @@ if master_file:
 
         for index_code, code in enumerate(all_codes):
             for index_store ,store in enumerate(all_stores):
-                if (df_master.iloc[index_store + (store_name_row+1), index_code + (store_name_column+1)] == 'R') or (df_master.iloc[index_store + (store_name_row+1), index_code + (store_name_column+1)] == '1'):
+                if (df_master.iloc[index_store + (store_name_row+1), index_code + (store_name_column+1)] == 'R') or (df_master.iloc[index_store + (store_name_row+1), index_code + (store_name_column+1)] == 1):
                     season_ranging_data['Store'].append(store)
                     season_ranging_data['ITEMNUMBER'].append(code)
                     season_ranging_data['PRODUCTNAME'].append(df_master.iloc[store_name_row-2, index_code + store_name_column+1])
         df_new_season = pd.DataFrame(season_ranging_data)
-        #st.dataframe(df_new_season)
 
         chunk_size = 4000
 
