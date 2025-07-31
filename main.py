@@ -32,7 +32,7 @@ if master_file:
                     season_ranging_data['PRODUCTNAME'].append(df_master.iloc[store_name_row-2, index_code + store_name_column+1])
         df_new_season = pd.DataFrame(season_ranging_data)
 
-        chunk_size = 4000
+        chunk_size = 5000
 
         chunks = [df_new_season.iloc[i:i + chunk_size] for i in range(0, len(df_new_season), chunk_size)]
 
